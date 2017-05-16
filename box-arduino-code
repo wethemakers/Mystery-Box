@@ -1,0 +1,295 @@
+const int blitzled1 = 9;
+const int blitzled2 = 8;
+const int redled = 7;
+const int orangeled = 6;
+const int yellowled = 5;
+const int blueled = 4;
+const int fotor = A0;
+const int temp = A1;
+int valu = 0;
+int fot = 0;
+int trigPin = 11;
+int echoPin = 12;
+long duration, cm, inches;
+int ledState = LOW;
+int steps = 1;
+unsigned long previousMillis = 0;
+const long interval = 100;
+unsigned long currentTime = 0;
+unsigned long pastTime = 0;
+int currentState = 0;
+unsigned long seconds = 0;#
+include
+Servo myservo;
+void setup() {
+ pinMode(blitzled1, OUTPUT);
+ pinMode(blitzled2, OUTPUT);
+ pinMode(redled, OUTPUT);
+ pinMode(orangeled, OUTPUT);
+ pinMode(yellowled, OUTPUT);
+ pinMode(blueled, OUTPUT);
+ pinMode(trigPin, OUTPUT);
+ pinMode(echoPin, INPUT);
+ pinMode(fotor, INPUT);
+ pinMode(temp, INPUT);
+ myservo.attach(10);
+ Serial.begin(9600);
+ myservo.write(100);
+ startup();
+}
+void loop() {
+ if (steps == 1) {
+  digitalWrite(blitzled1, LOW);
+  digitalWrite(blitzled2, LOW);
+  digitalWrite(redled, HIGH);
+  digitalWrite(orangeled, LOW);
+  digitalWrite(yellowled, LOW);
+  digitalWrite(blueled, LOW);
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(5);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  duration = pulseIn(echoPin, HIGH);
+  cm = (duration / 2) / 29.1;
+  if (cm > 7 && cm < 9) {
+   pastTime = currentTime;
+   currentTime = millis();
+   unsigned long timePassed = currentTime - pastTime;
+   if (timePassed >= 1000); {
+    seconds++;
+    pastTime = currentTime;
+    blitz();
+   }
+   if (seconds == 20) {
+    Serial.print("Done!");
+    Serial.println();
+    seconds = 0;
+    steps = 2;
+    Serial.print("Step 2");
+    digitalWrite(blitzled1, LOW);
+    digitalWrite(blitzled2, LOW);
+   }
+   Serial.print(cm);
+   Serial.println();
+   delay(50);
+  }
+ }
+ if (steps == 2) {
+  int plm = 0;
+  digitalWrite(orangeled, HIGH);
+  valu = analogRead(fotor);
+  plm = map(valu, 0, 1023, 0, 100);
+  Serial.print(plm);
+  Serial.println();
+  if (plm > 0 && plm < 6) {
+   pastTime = currentTime;
+   currentTime = millis();
+   unsigned long timePassed = currentTime - pastTime;
+   if (timePassed >= 1000); {
+    seconds++;
+    pastTime = currentTime;
+    blitz();
+   }
+   if (seconds == 20) {
+    Serial.print("Done!");
+    Serial.println();
+    seconds = 0;
+    steps = 3;
+    Serial.print("Step 3");
+    digitalWrite(blitzled1, LOW);
+    digitalWrite(blitzled2, LOW);
+
+   }
+
+   Serial.println();
+   delay(50);
+
+  }
+ }
+ if (steps == 3) {
+  digitalWrite(yellowled, HIGH);
+  int temps = analogRead(temp);
+  int tempsp = map(temps, 0, 1023, 0, 100);
+  Serial.print(tempsp);
+  Serial.println();
+  if (tempsp >= 53) {
+   pastTime = currentTime;
+   currentTime = millis();
+   unsigned long timePassed = currentTime - pastTime;
+   if (timePassed >= 1000); {
+    seconds++;
+    pastTime = currentTime;
+    blitz();
+   }
+   if (seconds == 10) {
+    Serial.print("Done!");
+    Serial.println();
+    seconds = 0;
+    steps = 4;
+    Serial.print("Step 4");
+    digitalWrite(blitzled1, LOW);
+    digitalWrite(blitzled2, LOW);
+
+   }
+
+   Serial.println();
+   delay(50);
+
+  }
+ }
+ if (steps == 4) {
+  int plmz;
+  int valuz;
+  digitalWrite(blueled, HIGH);
+  valuz = analogRead(fotor);
+  plmz = map(valuz, 0, 1023, 0, 100);
+  Serial.print(plmz);
+  Serial.println();
+  if (plmz >= 75) {
+   pastTime = currentTime;
+   currentTime = millis();
+   unsigned long timePassed = currentTime - pastTime;
+   if (timePassed >= 1000); {
+    seconds++;
+    pastTime = currentTime;
+    blitz();
+   }
+   if (seconds == 20) {
+    Serial.print("Done!");
+    Serial.println();
+    seconds = 0;
+    steps = 5;
+    Serial.print("All done!");
+    digitalWrite(blitzled1, LOW);
+    digitalWrite(blitzled2, LOW);
+    myservo.write(0);
+
+   }
+
+   Serial.println();
+   delay(50);
+
+  }
+ }
+}
+void blitz() {
+ unsigned long currentMillis = millis();
+ if (currentMillis - previousMillis >= interval) {
+  previousMillis = currentMillis;
+  unsigned long previousMillis = 0;
+  const long interval = 100;
+  if (ledState == LOW) {
+   ledState = HIGH;
+  } else {
+   ledState = LOW;
+  }
+  digitalWrite(blitzled1, ledState);
+  delay(100);
+  digitalWrite(blitzled2, ledState);
+ }
+}
+void startup() {
+ digitalWrite(blitzled1, HIGH);
+ delay(1000);
+ digitalWrite(blitzled2, HIGH);
+ delay(1000);
+ digitalWrite(redled, HIGH);
+ delay(1000);
+ digitalWrite(orangeled, HIGH);
+ delay(1000);
+ digitalWrite(yellowled, HIGH);
+ delay(1000);
+ digitalWrite(blueled, HIGH);
+ delay(3000);
+ digitalWrite(blitzled1, LOW);
+ digitalWrite(blitzled2, LOW);
+ digitalWrite(redled, LOW);
+ digitalWrite(orangeled, LOW);
+ digitalWrite(yellowled, LOW);
+ digitalWrite(blueled, LOW);
+ delay(1000);
+ digitalWrite(blitzled1, HIGH);
+ digitalWrite(blitzled2, HIGH);
+ digitalWrite(redled, HIGH);
+ digitalWrite(orangeled, HIGH);
+ digitalWrite(yellowled, HIGH);
+ digitalWrite(blueled, HIGH);
+ delay(150);
+ digitalWrite(blitzled1, LOW);
+ digitalWrite(blitzled2, LOW);
+ digitalWrite(redled, LOW);
+ digitalWrite(orangeled, LOW);
+ digitalWrite(yellowled, LOW);
+ digitalWrite(blueled, LOW);
+ delay(150);
+ digitalWrite(blitzled1, HIGH);
+ digitalWrite(blitzled2, HIGH);
+ digitalWrite(redled, HIGH);
+ digitalWrite(orangeled, HIGH);
+ digitalWrite(yellowled, HIGH);
+ digitalWrite(blueled, HIGH);
+ delay(150);
+ digitalWrite(blitzled1, LOW);
+ digitalWrite(blitzled2, LOW);
+ digitalWrite(redled, LOW);
+ digitalWrite(orangeled, LOW);
+ digitalWrite(yellowled, LOW);
+ digitalWrite(blueled, LOW);
+ delay(150);
+ digitalWrite(blitzled1, HIGH);
+ digitalWrite(blitzled2, HIGH);
+ digitalWrite(redled, HIGH);
+ digitalWrite(orangeled, HIGH);
+ digitalWrite(yellowled, HIGH);
+ digitalWrite(blueled, HIGH);
+ delay(150);
+ digitalWrite(blitzled1, LOW);
+ digitalWrite(blitzled2, LOW);
+ digitalWrite(redled, LOW);
+ digitalWrite(orangeled, LOW);
+ digitalWrite(yellowled, LOW);
+ digitalWrite(blueled, LOW);
+ delay(150);
+ digitalWrite(blitzled1, HIGH);
+ digitalWrite(blitzled2, HIGH);
+ digitalWrite(redled, HIGH);
+ digitalWrite(orangeled, HIGH);
+ digitalWrite(yellowled, HIGH);
+ digitalWrite(blueled, HIGH);
+ delay(150);
+ digitalWrite(blitzled1, LOW);
+ digitalWrite(blitzled2, LOW);
+ digitalWrite(redled, LOW);
+ digitalWrite(orangeled, LOW);
+ digitalWrite(yellowled, LOW);
+ digitalWrite(blueled, LOW);
+ delay(150);
+ digitalWrite(blitzled1, HIGH);
+ digitalWrite(blitzled2, HIGH);
+ digitalWrite(redled, HIGH);
+ digitalWrite(orangeled, HIGH);
+ digitalWrite(yellowled, HIGH);
+ digitalWrite(blueled, HIGH);
+ delay(150);
+ digitalWrite(blitzled1, LOW);
+ digitalWrite(blitzled2, LOW);
+ digitalWrite(redled, LOW);
+ digitalWrite(orangeled, LOW);
+ digitalWrite(yellowled, LOW);
+ digitalWrite(blueled, LOW);
+ delay(150);
+ digitalWrite(blitzled1, HIGH);
+ digitalWrite(blitzled2, HIGH);
+ digitalWrite(redled, HIGH);
+ digitalWrite(orangeled, HIGH);
+ digitalWrite(yellowled, HIGH);
+ digitalWrite(blueled, HIGH);
+ delay(150);
+ digitalWrite(blitzled1, LOW);
+ digitalWrite(blitzled2, LOW);
+ digitalWrite(redled, LOW);
+ digitalWrite(orangeled, LOW);
+ digitalWrite(yellowled, LOW);
+ digitalWrite(blueled, LOW);
+}
