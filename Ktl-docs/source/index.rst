@@ -1,10 +1,12 @@
 .. image:: http://kontikilabs.com/img/ktl_logo.png
+   :target: http://kontikilabs.com
    :height: 100px
    :width: 500px
    :scale: 50 %
    :alt: KontikiLabs
 
 .. image:: http://kontikilabs.com/developers/pages/img/developers.png
+   :target: http://kontikilabs.com
    :height: 100px
    :width: 300px
    :scale: 50 %
