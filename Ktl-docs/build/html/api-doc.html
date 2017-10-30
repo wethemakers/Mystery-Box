@@ -1,0 +1,188 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>KON-TIKI LABS PLATFORM &#8212; Documents 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to Documents’s documentation!" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to Documents’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Documents 0.0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="kon-tiki-labs-platform">
+<h1>KON-TIKI LABS PLATFORM<a class="headerlink" href="#kon-tiki-labs-platform" title="Permalink to this headline">¶</a></h1>
+<p>This document is intended to get you started with your bot content using the KTL platform APIs.
+Check the document below to find out how your bot developers can retrieve the platform ‘flakes’, and perform all the necessary CRUD actions with our simple to use APIs.</p>
+<div class="section" id="user-get-the-user-details">
+<h2><strong>User : Get the User Details</strong><a class="headerlink" href="#user-get-the-user-details" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first"><strong>User login</strong></p>
+<p><em>Generate access token</em></p>
+<p>Get your ‘Access Token’ by providing your platform credentials. Access tokens are required to access data or make changes to your platform data via the APIs.
+An example of the request and response:</p>
+<p><em>Request</em></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>-------------------------------------------------------------
+| URL    : http://app.kontikilabs.com:3000/api/users/login  |
+-------------------------------------------------------------
+| HEADER : Content-Type:application/json                    |
+-------------------------------------------------------------
+| METHOD : ``POST``                                         |
+-------------------------------------------------------------
+</pre></div>
+</div>
+<p><em>Data</em></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;email&quot;</span><span class="p">:</span><span class="s2">&quot;&lt;your_email_id&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">:</span><span class="s2">&quot;&lt;your_password&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">:</span><span class="s2">&quot;platform&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p><em>Response</em></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">STATUS</span> <span class="n">CODE</span> <span class="p">:</span> <span class="mi">200</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;ACCESS_TOKEN&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-08-23T06:28:45.142Z&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;userId&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;USER_ID&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;userDetail&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;organisation_id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;ORGANISATION_ID&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;USER_ROLE_ID&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;USER_NAME&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;EMAIL_ID&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;emailVerified&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;USER_ID&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-08-21T06:31:57.547Z&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;modified&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-08-21T06:32:13.938Z&quot;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+</pre></div>
+</div>
+<p>If the data is invalid, you will get the following response</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">STATUS</span> <span class="n">CODE</span> <span class="p">:</span> <span class="mi">401</span>
+       <span class="p">{</span>
+         <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="p">{</span>
+           <span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">401</span><span class="p">,</span>
+           <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Error&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;login failed&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="s2">&quot;LOGIN_FAILED&quot;</span>
+         <span class="p">}</span>
+       <span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<blockquote>
+<div><p>The following user roles can be used to determine permissions assigned to the user</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="77%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Role</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>customer</td>
+<td>The bot users</td>
+</tr>
+<tr class="row-odd"><td>superadmin</td>
+<td>User who owns the organisation account</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<ul>
+<li><p class="first"><strong>Update user</strong></p>
+<p>The update API allows for updating user details by filling in the desired value in the input JSON. Below is an example of the request and response:</p>
+<p><em>Request</em></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>-------------------------------------------------------------
+| URL    : http://app.kontikilabs.com:3000/api/users/login  |
+-------------------------------------------------------------
+| HEADER : Content-Type:application/json                    |
+-------------------------------------------------------------
+| METHOD : ``POST``                                         |
+-------------------------------------------------------------
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="organisation-get-what-your-organisation-holds">
+<h2><strong>Organisation : Get what your organisation holds</strong><a class="headerlink" href="#organisation-get-what-your-organisation-holds" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to Documents’s documentation!</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to Documents’s documentation!"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Documents 0.0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Tanya Thakur.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+    </div>
+  </body>
+</html>
