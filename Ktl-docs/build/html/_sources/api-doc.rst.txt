@@ -1,6 +1,6 @@
-########################
-KON-TIKI LABS PLATFORM 
-########################
+#####################################
+KON-TIKI LABS PLatform : API Document 
+#####################################
 
 This document is intended to get you started with your bot content using the KTL platform APIs.
 Check the document below to find out how your bot developers can retrieve the platform ‘flakes’, and perform all the necessary CRUD actions with our simple to use APIs.
