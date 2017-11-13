@@ -1,0 +1,227 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Get started with Docker &#8212; Kontiki Developers 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="The Standard Code Writing &amp; Commenting Format" href="code-writing.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="code-writing.html" title="The Standard Code Writing &amp; Commenting Format"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="kontiki-developers.html">Kontiki Developers 0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="get-started-with-docker">
+<h1>Get started with Docker<a class="headerlink" href="#get-started-with-docker" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="install-docker">
+<h2>Install Docker<a class="headerlink" href="#install-docker" title="Permalink to this headline">¶</a></h2>
+<p>Docker is available on multiple platforms. Check the following link to choose the best installation path for you:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="https://docs.docker.com/docker-for-mac/install">Docker for Mac (macOS)</a></li>
+<li><a class="reference external" href="https://docs.docker.com/docker-for-windows/install">Docker for Windows (Microsoft Windows 10)</a></li>
+</ul>
+</div></blockquote>
+<p>If the above does not fulfil your requirements follow the link <a class="reference external" href="https://docs.docker.com/engine/installation/">here</a> .</p>
+</div>
+<div class="section" id="create-execute-the-dockerfile">
+<h2>Create &amp; Execute the Dockerfile<a class="headerlink" href="#create-execute-the-dockerfile" title="Permalink to this headline">¶</a></h2>
+<p>Docker automatically build images by reading the instructions you provide in the <code class="docutils literal"><span class="pre">Dockerfile</span></code>. A <code class="docutils literal"><span class="pre">Dockerfile</span></code> is a text document that contains all the command a user could call on the command line to assemble an image.</p>
+<p>The <code class="docutils literal"><span class="pre">Dockerfile</span></code> must start with the <code class="docutils literal"><span class="pre">FROM</span></code> instruction. Below is an example of a <code class="docutils literal"><span class="pre">Dockerfile</span></code></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># base image</span>
+<span class="n">FROM</span> <span class="n">ubuntu</span><span class="p">:</span><span class="n">latest</span>
+
+<span class="c1"># clean and update sources</span>
+<span class="n">RUN</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">clean</span> <span class="o">&amp;&amp;</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+
+<span class="c1"># install basic apps</span>
+<span class="n">RUN</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="o">-</span><span class="n">qy</span> <span class="n">nano</span>
+
+<span class="c1"># install Python and modules</span>
+<span class="n">RUN</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="o">-</span><span class="n">qy</span> <span class="n">python3</span>
+<span class="n">RUN</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="o">-</span><span class="n">qy</span> <span class="n">python3</span><span class="o">-</span><span class="n">psycopg2</span>
+</pre></div>
+</div>
+<p>Follow this <a class="reference external" href="https://docs.docker.com/engine/reference/builder/">link</a> to know more about creating a <code class="docutils literal"><span class="pre">Dockerfile</span></code>.</p>
+<ul>
+<li><p class="first">To login into your account</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ docker login
+</pre></div>
+</div>
+</li>
+<li><p class="first">Executing the <code class="docutils literal"><span class="pre">Dockerfile</span></code> commands</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>To directly execute the file command use:
+$ docker build . (With this command &lt;none&gt; repo is created. To avoid this use the next command)
+Sending build context to Docker daemon 5.51 MB
+...
+
+You can specify the name of the repository with:
+$ docker build -t your_name .
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="view-all-the-images">
+<h2>View all the Images<a class="headerlink" href="#view-all-the-images" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">To view all the top level images run</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ docker images
+
+The output:
+
+REPOSITORY   TAG      IMAGE ID       CREATED         SIZE
+----------------------------------------------------------
+your_name    latest   d6e415a70abf   8 seconds ago   210MB
+ubuntu       latest   747cb2d60bbe   2 weeks ago     122MB
+</pre></div>
+</div>
+<p>The above output states that the repository <code class="docutils literal"><span class="pre">ubuntu</span></code> is the base image, because of the <code class="docutils literal"><span class="pre">FROM</span> <span class="pre">ubuntu:latest</span></code> command in the Dockerfile.</p>
+<p>The <code class="docutils literal"><span class="pre">your_name</span></code> image is the combination of all the packages mentioned in the Dockerfile.</p>
+</li>
+<li><p class="first">To delete the images</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ docker rmi image_id
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="containers">
+<h2>Containers<a class="headerlink" href="#containers" title="Permalink to this headline">¶</a></h2>
+<p>Docker containers ensures that the software will behave the same way, regardless of where it is deployed, because its runtime environment is ruthlessly consistent.</p>
+<ul>
+<li><p class="first">To create a container in your image use</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ docker run -ti image_name
+
+Where :
+        -       t : gives us the terminal
+        -       I : allows us to interact with the terminal
+
+Output - root : root@contaner_id:/#
+</pre></div>
+</div>
+</li>
+<li><p class="first">To exit from the container</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">root</span> <span class="p">:</span> <span class="n">root</span><span class="nd">@contaner_id</span><span class="p">:</span><span class="o">/</span><span class="c1"># exit</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">To Check all containers in your image</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>To list all the containers:
+$ docker ps -a
+
+To check the running container:
+$ docker ps
+</pre></div>
+</div>
+</li>
+<li><p class="first">To delete the container</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ docker rm contaner_id
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="image-to-docker-cloud">
+<h2>Image to Docker Cloud<a class="headerlink" href="#image-to-docker-cloud" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Search command to find suitable image</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ docker search image_name
+</pre></div>
+</div>
+<p>Below is a screenshot for : <code class="docutils literal"><span class="pre">docker</span> <span class="pre">search</span> <span class="pre">ubuntu</span></code></p>
+<p>IMAGE.</p>
+</li>
+<li><p class="first">To pull the image</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ docker pull username/repo_name:tag_Name
+</pre></div>
+</div>
+</li>
+<li><p class="first">To commit the image</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ docker tag IMAGE_ID username/repo_name:tag_Name
+</pre></div>
+</div>
+</li>
+<li><p class="first">To push image</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ docker push username/repo_name:tag_Name
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="code-writing.html"
+                        title="previous chapter">The Standard Code Writing &amp; Commenting Format</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="code-writing.html" title="The Standard Code Writing &amp; Commenting Format"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="kontiki-developers.html">Kontiki Developers 0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Tanya Thakur.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+    </div>
+  </body>
+</html>

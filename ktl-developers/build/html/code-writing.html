@@ -1,0 +1,185 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>The Standard Code Writing &amp; Commenting Format &#8212; Kontiki Developers 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="The Standard Code Writing &amp; Commenting Format" href="kontiki-developers.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="kontiki-developers.html" title="The Standard Code Writing &amp; Commenting Format"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="kontiki-developers.html">Kontiki Developers 0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-standard-code-writing-commenting-format">
+<h1>The Standard Code Writing &amp; Commenting Format<a class="headerlink" href="#the-standard-code-writing-commenting-format" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="create-a-new-file">
+<h2>Create a New File<a class="headerlink" href="#create-a-new-file" title="Permalink to this headline">¶</a></h2>
+<p>Whenever you create a new file, the first line of the file should start with a comment dedicated to the file. The comment structure should be like</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/******************************************************************</span>
+<span class="o">//</span> <span class="nd">@desc</span>             <span class="p">:</span> <span class="n">A</span> <span class="n">short</span> <span class="n">description</span> <span class="n">of</span> <span class="n">the</span> <span class="n">file</span>
+<span class="o">//</span> <span class="nd">@author</span>           <span class="p">:</span> <span class="n">The</span> <span class="n">name</span> <span class="n">of</span> <span class="n">the</span> <span class="n">developer</span> <span class="n">creating</span> <span class="n">the</span> <span class="n">file</span>
+<span class="o">//</span> <span class="nd">@files_required</span>   <span class="p">:</span> <span class="n">Name</span> <span class="n">the</span> <span class="n">required</span> <span class="n">system</span> <span class="n">files</span>
+<span class="o">//</span> <span class="nd">@requested_modules</span><span class="p">:</span> <span class="n">Name</span> <span class="n">the</span> <span class="n">module</span> <span class="n">dependencies</span><span class="p">,</span> <span class="k">if</span> <span class="nb">any</span>
+<span class="o">//</span> <span class="nd">@created_date</span>     <span class="p">:</span> <span class="n">Time</span> <span class="ow">and</span> <span class="n">date</span> <span class="n">when</span> <span class="n">the</span> <span class="n">file</span> <span class="ow">is</span> <span class="n">created</span><span class="o">.</span>
+<span class="o">/******************************************************************</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<p>It is important that we <strong>write meaningful function names</strong>, following the <cite>lowerCamelCase</cite> naming convention.</p>
+<p>Before you start writing the method, you should include a comment stating its purpose.
+Remember, to indicate the data type for a <code class="docutils literal"><span class="pre">&#64;param</span></code> or <code class="docutils literal"><span class="pre">&#64;return</span></code> tag, put the data type in {} brackets</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/******************************************************************</span>
+<span class="o">//</span> <span class="nd">@desc</span>    <span class="p">:</span> <span class="n">A</span> <span class="n">short</span> <span class="n">description</span> <span class="n">of</span> <span class="n">the</span> <span class="n">function</span>
+<span class="o">//</span> <span class="nd">@param</span>   <span class="p">:</span> <span class="p">{</span><span class="n">data_type_1</span><span class="p">}</span> <span class="n">paramName1</span><span class="p">,</span> <span class="p">{</span><span class="n">data_type_2</span><span class="p">}</span> <span class="n">paramName2</span>
+<span class="o">//</span> <span class="nd">@return</span>  <span class="p">:</span> <span class="p">{</span><span class="n">data_type</span><span class="p">}</span>
+<span class="o">/******************************************************************</span>
+</pre></div>
+</div>
+<p>Example</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">processOrder</span> <span class="p">(</span><span class="n">pdt</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>     <span class="c1"># Note spaces before, after function_name &amp; parenthesis</span>
+        <span class="n">const</span> <span class="n">MAX_ITEMS</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>        <span class="c1"># maximum number of packets</span>
+        <span class="n">const</span> <span class="n">MASK</span> <span class="o">=</span> <span class="mh">0x1F</span><span class="p">;</span>           <span class="c1"># mask bit TCP</span>
+        <span class="k">return</span> <span class="n">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">Avoid</span> <span class="n">obvious</span> <span class="n">comments</span> <span class="n">such</span> <span class="k">as</span><span class="p">:</span>
+<span class="o">----------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">5</span><span class="p">)</span>      <span class="o">//</span> <span class="n">a</span> <span class="n">equals</span> <span class="mi">5</span>
+<span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>     <span class="o">//</span> <span class="n">setting</span> <span class="n">the</span> <span class="n">counter</span> <span class="n">to</span> <span class="n">zero</span>
+
+<span class="n">Try</span> <span class="n">to</span> <span class="n">write</span> <span class="n">comments</span> <span class="n">that</span> <span class="n">explain</span> <span class="n">higher</span> <span class="n">level</span> <span class="n">mechanisms</span> <span class="ow">or</span> <span class="n">clarify</span> <span class="n">difficult</span> <span class="n">segments</span> <span class="n">of</span> <span class="n">your</span> <span class="n">code</span><span class="o">.</span> <span class="n">Do</span> <span class="ow">not</span> <span class="n">use</span> <span class="n">comments</span> <span class="n">to</span> <span class="n">restate</span> <span class="n">trivial</span> <span class="n">things</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="variables">
+<h2>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h2>
+<p>Variables names should use <cite>lowerCamelCase</cite>. They should also be descriptive. Single character variables and uncommon abbreviations should generally be avoided</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">stringMatches</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="o">/</span><span class="n">ID_</span><span class="p">([</span><span class="o">^</span>\<span class="n">n</span><span class="p">]</span><span class="o">+</span><span class="p">)</span><span class="o">=</span><span class="p">([</span><span class="o">^</span>\<span class="n">n</span><span class="p">]</span><span class="o">+</span><span class="p">)</span><span class="o">/</span><span class="p">);</span>  <span class="c1"># Execute a regex : Add a comment to a global variable</span>
+<span class="o">----------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="n">var</span> <span class="n">numberCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>   <span class="c1"># The local variables need not to be described each time. Don’t wastes your time writing needless comments.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="special-tags">
+<h2>Special Tags<a class="headerlink" href="#special-tags" title="Permalink to this headline">¶</a></h2>
+<p>When working on code as a team, adopt a consistent set of tags to communicate among programmers.  For example, use a <strong>TODO:</strong> tag to indicate a section of code that requires additional work</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">estimate</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+    <span class="o">//</span> <span class="n">TODO</span><span class="p">:</span> <span class="n">implement</span> <span class="n">the</span> <span class="n">calculations</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Few special tags are</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>-----------------------------------------------------------
+| BUG    - a known bug that should be corrected.          |
+-----------------------------------------------------------
+| FIXME  – should be corrected.                           |
+-----------------------------------------------------------
+| HACK   – a workaround.                                  |
+-----------------------------------------------------------
+| TODO   – something to be done.                          |
+-----------------------------------------------------------
+| UNDONE – a reversal or &quot;roll back&quot; of previous code.    |
+-----------------------------------------------------------
+| UX     – user experience, notice about non-trivial code.|
+-----------------------------------------------------------
+</pre></div>
+</div>
+</div>
+<div class="section" id="end-of-the-file">
+<h2>End of the File<a class="headerlink" href="#end-of-the-file" title="Permalink to this headline">¶</a></h2>
+<p>Signal the end of any file with the comment structure as below</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/******************************************************************</span>
+<span class="o">//</span> <span class="n">EOF</span> <span class="p">:</span> <span class="n">File_Name</span> <span class="p">(</span><span class="n">Signal</span> <span class="n">the</span> <span class="n">end</span> <span class="n">of</span> <span class="n">a</span> <span class="n">file</span><span class="p">)</span>
+<span class="o">/******************************************************************</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="committing-the-code">
+<h2>Committing the Code<a class="headerlink" href="#committing-the-code" title="Permalink to this headline">¶</a></h2>
+<p>Follow the below guidelines while pushing the code to the GIT repository:</p>
+<ul class="simple">
+<li>Always create a README.md file using the Markdown Language format.</li>
+<li>While pushing the code to the repo, add a valid description of the work you have done.</li>
+<li>Commit code in batches, please avoid small code commits.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="kontiki-developers.html"
+                        title="previous chapter">The Standard Code Writing &amp; Commenting Format</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="kontiki-developers.html" title="The Standard Code Writing &amp; Commenting Format"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="kontiki-developers.html">Kontiki Developers 0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Tanya Thakur.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+    </div>
+  </body>
+</html>
