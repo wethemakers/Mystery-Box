@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="index.html" /> 
+    <link rel="prev" title="Bot Building With Kon-Tiki Labs : The Kontiki Platform" href="Kontiki-Platform.html" /> 
   </head>
   <body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -33,7 +33,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="index.html" title="&lt;no title&gt;"
+          <a href="Kontiki-Platform.html" title="Bot Building With Kon-Tiki Labs : The Kontiki Platform"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Documents 0.0.1 documentation</a> &#187;</li> 
       </ul>
@@ -53,8 +53,8 @@ Check the document below to find out how your bot developers can retrieve the pl
 <ul>
 <li><p class="first"><strong>User login</strong></p>
 <p><em>Generate access token</em></p>
-<p>Get your ‘Access Token’ by providing your platform credentials. Access tokens are required to access data or make changes to your platform data via the APIs.
-An example of the request and response:</p>
+<p>Get your ‘Access Token’ by providing your platform credentials. Access tokens are required to access data or make changes to your platform data via the APIs.</p>
+<p>An example of the request and response:</p>
 <p><em>Request</em></p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>-------------------------------------------------------------
 | URL    : http://app.kontikilabs.com:3000/api/users/login  |
@@ -128,13 +128,104 @@ An example of the request and response:</p>
 <li><p class="first"><strong>Update user</strong></p>
 <p>The update API allows for updating user details by filling in the desired value in the input JSON. Below is an example of the request and response:</p>
 <p><em>Request</em></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>-------------------------------------------------------------
-| URL    : http://app.kontikilabs.com:3000/api/users/login  |
--------------------------------------------------------------
-| HEADER : Content-Type:application/json                    |
--------------------------------------------------------------
-| METHOD : ``POST``                                         |
--------------------------------------------------------------
+<div class="highlight-default"><div class="highlight"><pre><span></span>-----------------------------------------------------------------------
+| URL          : http://app.kontikilabs.com:3000/api/users/{user_id}  |
+-----------------------------------------------------------------------
+| HEADER       : Content-Type     : application/json                  |
+|                                                                     |
+|                KTL-Access-Token : {access_token}                    |
+-----------------------------------------------------------------------
+| METHOD       : ``PATCH``                                            |
+-----------------------------------------------------------------------
+| Request JSON :                                                      |
+|     {                                                               |
+|       &quot;organisation_id&quot;: &quot;string&quot;,                                  |
+|       &quot;bot_id&quot;: &quot;string&quot;,                                           |
+|       &quot;bot_name&quot;: &quot;string&quot;,                                         |
+|       &quot;role&quot;: &quot;owner&quot;,                                              |
+|       &quot;platform&quot;: &quot;string&quot;,                                         |
+|       &quot;phone_no&quot;: &quot;string&quot;,                                         |
+|       &quot;username&quot;: &quot;string&quot;,                                         |
+|       &quot;email&quot;: &quot;string&quot;,                                            |
+|       &quot;id&quot;: &quot;string&quot;,                                               |
+|     }                                                               |
+-----------------------------------------------------------------------
+</pre></div>
+</div>
+<p><em>Data</em></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;phone_no&quot;</span><span class="p">:</span><span class="s2">&quot;&lt;new_phone_number&gt;&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><em>Rather than sending the entire JSON, you can just send the values you want to update</em>.</p>
+</div>
+<p><em>Response</em></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">STATUS</span> <span class="n">CODE</span> <span class="p">:</span> <span class="mi">200</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;organisation_id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;ORGANISATION_ID&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;USER_ROLE_ID&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;phone_no&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;NEW_PHONE_NUMBER&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;USER_NAME&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;EMAIL_ID&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;emailVerified&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;USER_ID&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-08-21T06:31:57.547Z&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;modified&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-08-21T06:32:13.938Z&quot;</span>
+      <span class="p">}</span>
+</pre></div>
+</div>
+<p>If the <em>user_id</em> is invalid, you will get the following response</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">STATUS</span> <span class="n">CODE</span> <span class="p">:</span> <span class="mi">404</span> <span class="o">-</span> <span class="n">Wrong</span> <span class="n">User</span> <span class="n">ID</span>
+       <span class="p">{</span>
+         <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="p">{</span>
+           <span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">404</span><span class="p">,</span>
+           <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Error&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;could not find a model with id &lt;user_id&gt;&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="s2">&quot;MODEL_NOT_FOUND&quot;</span>
+         <span class="p">}</span>
+       <span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><strong>Get user info</strong></p>
+<p>Get the details of the user, such as <em>role</em>, <em>username</em> etc., by passing the <em>user_Id</em>. An example of the request and response:</p>
+<p><em>Request</em></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>+---------------------------------------------------------------------+
+| URL          : http://app.kontikilabs.com:3000/api/users/{user_id}  |
++---------------------------------------------------------------------+
+| HEADER       : Content-Type     : application/json                  |
+|                                                                     |
+|                KTL-Access-Token : {access_token}                    |
++---------------------------------------------------------------------+
+| METHOD       : ``GET``                                              |
++---------------------------------------------------------------------+
+</pre></div>
+</div>
+<p><em>Response</em></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">STATUS</span> <span class="n">CODE</span> <span class="p">:</span> <span class="mi">200</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;organisation_id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;ORGANISATION_ID&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;USER_ROLE_ID&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;phone_no&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;PHONE_NUMBER&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;USER_NAME&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;EMAIL_ID&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;emailVerified&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;USER_ID&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-08-21T06:31:57.547Z&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;modified&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-08-21T06:32:13.938Z&quot;</span>
+      <span class="p">}</span>
+</pre></div>
+</div>
+<p>If the <em>user_id</em> is invalid, you will receive the following response</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">STATUS</span> <span class="n">CODE</span> <span class="p">:</span> <span class="mi">404</span> <span class="o">-</span> <span class="n">Wrong</span> <span class="n">User</span> <span class="n">ID</span>
+       <span class="p">{</span>
+         <span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">404</span><span class="p">,</span>
+          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Error&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Unknown </span><span class="se">\&quot;</span><span class="s2">user</span><span class="se">\&quot;</span><span class="s2"> id </span><span class="se">\&quot;</span><span class="s2">&lt;user_id&gt;</span><span class="se">\&quot;</span><span class="s2">.&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="s2">&quot;MODEL_NOT_FOUND&quot;</span>
+         <span class="p">}</span>
+       <span class="p">}</span>
 </pre></div>
 </div>
 </li>
@@ -142,6 +233,550 @@ An example of the request and response:</p>
 </div>
 <div class="section" id="organisation-get-what-your-organisation-holds">
 <h2><strong>Organisation : Get what your organisation holds</strong><a class="headerlink" href="#organisation-get-what-your-organisation-holds" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first"><strong>Organisation details</strong></p>
+<p>Get the details of your organisation with the following request:</p>
+<p><em>Request</em></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>---------------------------------------------------------------------------------------
+| URL          : http://app.kontikilabs.com:3000/api/organisations/{organisation_id}  |
+---------------------------------------------------------------------------------------
+| HEADER       : Content-Type     : application/json                                  |
+|                                                                                     |
+|                KTL-Access-Token : {access_token}                                    |
+---------------------------------------------------------------------------------------
+| METHOD       : ``GET``                                                              |
+---------------------------------------------------------------------------------------
+</pre></div>
+</div>
+<p><em>Response</em></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">STATUS</span> <span class="n">CODE</span> <span class="p">:</span> <span class="mi">200</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;company_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;COMPANY_NAME&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;plan&quot;</span><span class="p">:</span> <span class="s2">&quot;premium&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;EMAIL_ID&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;ORGANISATION_ID&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-08-21T06:31:57.394Z&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;modified&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-08-21T06:31:57.394Z&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;USER_NAME&gt;&quot;</span>
+      <span class="p">}</span>
+</pre></div>
+</div>
+<p>If the <em>organisation_id</em> is invalid, you will receive the response as follows</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">STATUS</span> <span class="n">CODE</span> <span class="p">:</span> <span class="mi">404</span> <span class="o">-</span> <span class="n">Wrong</span> <span class="n">Organisation</span> <span class="n">ID</span>
+       <span class="p">{</span>
+         <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="p">{</span>
+           <span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">404</span><span class="p">,</span>
+           <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Error&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Unknown </span><span class="se">\&quot;</span><span class="s2">organisation</span><span class="se">\&quot;</span><span class="s2"> id </span><span class="se">\&quot;</span><span class="s2">&lt;organisation_id&gt;</span><span class="se">\&quot;</span><span class="s2">.&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="s2">&quot;MODEL_NOT_FOUND&quot;</span>
+         <span class="p">}</span>
+       <span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><strong>Organisation users</strong></p>
+<p>Get a list of users in your organisation. Below is an example of the request and response:</p>
+<p><em>Request</em></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>----------------------------------------------------------------------------------------------
+| URL          : http://app.kontikilabs.com:3000/api/organisations/{organisation_id}/users   |
+----------------------------------------------------------------------------------------------
+| HEADER       : Content-Type     : application/json                                         |
+|                                                                                            |
+|                KTL-Access-Token : {access_token}                                           |
+----------------------------------------------------------------------------------------------
+| FILTER       : {&quot;limit&quot;:1, &quot;skip&quot;:0}                                                       |
+|                                                                                            |
+| limit        : Limits the number of records returned to the specified number(or less)      |
+| skip         : Omits specified number of returned records. Useful to paginate responses    |
+----------------------------------------------------------------------------------------------
+| METHOD       : ``GET``                                                                     |
+----------------------------------------------------------------------------------------------
+</pre></div>
+</div>
+<p><em>Response</em></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">STATUS</span> <span class="n">CODE</span> <span class="p">:</span> <span class="mi">200</span>
+      <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;organisation_id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;ORGANISATION_ID&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;USER_ROLE_ID&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;phone_no&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;PHONE_NUMBER&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;USER_NAME&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;EMAIL_ID&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;emailVerified&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;USER_ID&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-08-21T06:31:57.547Z&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;modified&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-08-21T06:32:13.938Z&quot;</span>
+        <span class="p">}</span>
+      <span class="p">]</span>
+</pre></div>
+</div>
+<p>If the <em>organisation_id</em> is invalid, you will receive the response as follows</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">STATUS</span> <span class="n">CODE</span> <span class="p">:</span> <span class="mi">404</span> <span class="o">-</span> <span class="n">Wrong</span> <span class="n">Organisation</span> <span class="n">ID</span>
+       <span class="p">{</span>
+         <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="p">{</span>
+           <span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">404</span><span class="p">,</span>
+           <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Error&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;could not find a model with id &lt;organisation_id&gt;&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="s2">&quot;MODEL_NOT_FOUND&quot;</span>
+         <span class="p">}</span>
+       <span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><strong>Bots in your organisation</strong></p>
+<p>Get a list of all the bots in your organisation with the following request:</p>
+<p><em>Request</em></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>------------------------------------------------------------------------------------------
+| URL        : http://app.kontikilabs.com:3000/api/organisations/{organisation_id}/bots  |
+------------------------------------------------------------------------------------------
+| HEADER     : Content-Type     : application/json                                       |
+|                                                                                        |
+|              KTL-Access-Token : {access_token}                                         |
+-------------------------------------------------------------------------------------------
+| FILTER     : {&quot;limit&quot;:1, &quot;skip&quot;:0}                                                     |
+|                                                                                        |
+| limit      : Limits the number of records returned to the specified number(or less).   |
+| skip       : Omits specified number of returned records. Useful to paginate responses. |
+------------------------------------------------------------------------------------------
+| METHOD     : ``GET``                                                                   |
+------------------------------------------------------------------------------------------
+</pre></div>
+</div>
+<p><em>Response</em></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">STATUS</span> <span class="n">CODE</span> <span class="p">:</span> <span class="mi">200</span>
+      <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;BOT_NAME_1&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;platform&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;BOT_PLATFORM&gt;&quot;</span><span class="p">,</span>          <span class="c1">#Slack or Facebook Messenger</span>
+          <span class="s2">&quot;domain&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;BOT_DOMAIN&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;organisation_id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;ORGANISATION_ID&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;BOT_ID_1&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-08-21T06:47:01.949Z&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;modified&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-08-21T06:47:01.949Z&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;BOT_NAME_2&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;platform&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;BOT_PLATFORM&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;domain&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;BOT_DOMAIN&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;organisation_id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;ORGANISATION_ID&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;BOT_ID_2&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-08-21T07:42:35.399Z&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;modified&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-08-21T07:42:35.399Z&quot;</span>
+        <span class="p">}</span>
+      <span class="p">]</span>
+</pre></div>
+</div>
+<p>If the <em>organisation_id</em> is invalid, you will get the following response</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">STATUS</span> <span class="n">CODE</span> <span class="p">:</span> <span class="mi">404</span> <span class="o">-</span> <span class="n">Wrong</span> <span class="n">Organisation</span> <span class="n">ID</span>
+       <span class="p">{</span>
+         <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="p">{</span>
+           <span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">404</span><span class="p">,</span>
+           <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Error&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;could not find a model with id &lt;organisation_id&gt;&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="s2">&quot;MODEL_NOT_FOUND&quot;</span>
+         <span class="p">}</span>
+       <span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><strong>Bot users in your organisation</strong></p>
+<p>Get a list of users using the bot by passing the ‘bot_id’ in the where clause:</p>
+<p><em>Request</em></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>---------------------------------------------------------------------------------------------
+| URL          : http://app.kontikilabs.com:3000/api/organisations/{organisation_id}/users  |
+---------------------------------------------------------------------------------------------
+| HEADER       : Content-Type     : application/json                                        |
+|                                                                                           |
+|                KTL-Access-Token : {access_token}                                          |
+---------------------------------------------------------------------------------------------
+| FILTER  : {&quot;where&quot;: {&quot;bot_id&quot;: &quot;&lt;bot_id&gt;&quot;}, &quot;limit&quot;:1, &quot;skip&quot;:0}                          |
+|                                                                                           |
+| limit   : Limits the number of records returned to the specified number(or less).         |
+| skip    : Omits specified number of returned records. Useful to paginate responses.       |
+---------------------------------------------------------------------------------------------
+| METHOD       : ``GET``                                                                    |
+---------------------------------------------------------------------------------------------
+</pre></div>
+</div>
+<p><em>Response</em></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">STATUS</span> <span class="n">CODE</span> <span class="p">:</span> <span class="mi">200</span>
+      <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;organisation_id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;ORGANISATION_ID&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;bot_id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;BOT_ID&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;USER_ROLE_ID&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;platform&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;BOT_PLATFORM&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;USER_NAME&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;EMAIL_ID&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;emailVerified&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;USER_ID&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-07-03T09:00:28.968Z&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;modified&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-07-03T09:00:29.007Z&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;DISPLAY_NAME&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;profilePic&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;bot&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;BOT_NAME&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">&quot;quiz_sets&quot;</span><span class="p">:</span> <span class="p">[],</span>
+          <span class="s2">&quot;read_stories&quot;</span><span class="p">:</span> <span class="p">[],</span>
+          <span class="s2">&quot;context_session&quot;</span><span class="p">:</span> <span class="p">[],</span>
+          <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;USER_ID&gt;”</span>
+        <span class="p">}</span>
+      <span class="p">]</span>
+</pre></div>
+</div>
+<p>If the <em>organisation_id</em> is invalid, you will get the following response</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">STATUS</span> <span class="n">CODE</span> <span class="p">:</span> <span class="mi">404</span> <span class="o">-</span> <span class="n">Wrong</span> <span class="n">Organisation</span> <span class="n">ID</span>
+       <span class="p">{</span>
+         <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="p">{</span>
+           <span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">404</span><span class="p">,</span>
+           <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Error&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;could not find a model with id &lt;organisation_id&gt;&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="s2">&quot;MODEL_NOT_FOUND&quot;</span>
+         <span class="p">}</span>
+       <span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="bots-handle-your-bot-data">
+<h2><strong>Bots : Handle your bot data</strong><a class="headerlink" href="#bots-handle-your-bot-data" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first"><strong>Get flakes</strong></p>
+<p>Get all the flakes present inside the bot. You can filter flakes according to flake status. Below is an example of the request and response:</p>
+<p><em>Request</em></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>------------------------------------------------------------------------------------------
+| URL          : http://app.kontikilabs.com:3000/api/bots/{bot_id}/flakes                |
+------------------------------------------------------------------------------------------
+| HEADER       : Content-Type     : application/json                                     |
+|                                                                                        |
+|                KTL-Access-Token : {access_token}                                       |
+------------------------------------------------------------------------------------------
+| FILTER      : {&quot;where&quot;: {&quot;status&quot;: &quot;&lt;flake_status&gt;&quot;}, &quot;limit&quot;:10, &quot;skip&quot;:0}            |
+|                                                                                        |
+|               Available flake status :                                                 |
+|                                      -draft                                            |
+|                                      -publish                                          |
+|                                      -schedule                                         |
+|                                                                                        |
+| limit       : Limits the number of records returned to the specified number(or less).  |
+| skip        : Omits specified number of returned records. Useful to paginate responses.|
+------------------------------------------------------------------------------------------
+| METHOD      : ``GET``                                                                  |
+------------------------------------------------------------------------------------------
+</pre></div>
+</div>
+<p><em>Response</em></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">STATUS</span> <span class="n">CODE</span> <span class="p">:</span> <span class="mi">200</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;FLAKE_TITLE&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;FLAKE_DESCRIPTION&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;image_url&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;FLAKE_IMAGE_URL&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;bullet_points&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;image&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;BULLET_TEXT&gt;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;button&quot;</span><span class="p">:</span> <span class="p">[{</span>
+              <span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;&lt;QR_BUTTON_NAME&gt;&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;action&quot;</span><span class="p">:</span><span class="s2">&quot;&lt;QR_BUTTON_ACTION&gt;&quot;</span>
+            <span class="p">}]</span>
+            <span class="s2">&quot;file_url&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;IMAGE_URL&gt;&quot;</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;BULLET_TEXT&gt;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;button&quot;</span><span class="p">:</span> <span class="p">[]</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;video&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;BULLET_TEXT&gt;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;button&quot;</span><span class="p">:</span> <span class="p">[]</span>
+            <span class="s2">&quot;file_url&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;VIDEO_URL&gt;&quot;</span>
+          <span class="p">},</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;FLAKE_STATUS&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&quot;&lt;FLAKE_CATEGORY_ID&gt;&quot;</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;bot_id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;BOT_ID&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;FLAKE_ID&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-08-27T09:26:08.344Z&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;modified&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-08-30T19:42:25.117Z&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;author_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;FLAKE_AUTHOR&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;organisation_id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;ORGANISATION_ID&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&quot;&lt;FLAKE_TAG_ID&gt;&quot;</span>
+        <span class="p">]</span>
+      <span class="p">}</span>
+</pre></div>
+</div>
+<p>If the <em>bot_id</em> is invalid, you will get the following response</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">STATUS</span> <span class="n">CODE</span> <span class="p">:</span> <span class="mi">404</span> <span class="o">-</span> <span class="n">Wrong</span> <span class="n">Bot</span> <span class="n">ID</span>
+       <span class="p">{</span>
+         <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="p">{</span>
+           <span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">404</span><span class="p">,</span>
+           <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Error&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;could not find a model with id &lt;bot_id&gt;&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="s2">&quot;MODEL_NOT_FOUND&quot;</span>
+         <span class="p">}</span>
+       <span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><strong>Get flake details</strong></p>
+<p>Get any flake information by passing the <em>bot_id</em> and <em>flake_id</em>, as in the request below:</p>
+<p><em>Request</em></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>--------------------------------------------------------------------------------------
+| URL          : http://app.kontikilabs.com:3000/api/bots/{bot_id}/flakes/{flake_id} |
+--------------------------------------------------------------------------------------
+| HEADER       : Content-Type     : application/json                                 |
+|                                                                                    |
+|                KTL-Access-Token : {access_token}                                   |
+--------------------------------------------------------------------------------------
+| METHOD       : ``GET``                                                             |
+--------------------------------------------------------------------------------------
+</pre></div>
+</div>
+<p><em>Response</em></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">STATUS</span> <span class="n">CODE</span> <span class="p">:</span> <span class="mi">200</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;FLAKE_TITLE&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;FLAKE_DESC&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;image_url&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;FLAKE_TITLE&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;bullet_points&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;BULLET_TEXT&gt;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;button&quot;</span><span class="p">:</span> <span class="p">[</span>
+              <span class="p">{</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;QR_BUTTON_NAME&gt;&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;QR_BUTTON_ACTION&gt;&quot;</span>
+              <span class="p">}</span>
+            <span class="p">]</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;image&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;BULLET_TEXT&gt;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;file_url&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;IMAGE_URL&gt;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;button&quot;</span><span class="p">:</span> <span class="p">[]</span>
+          <span class="p">}</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;FLAKE_STATUS&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="p">[</span>
+           <span class="s2">&quot;&lt;CATEGORY_ID&gt;&quot;</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;bot_id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;BOT_ID&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;FLAKE_ID&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-09-15T11:56:45.982Z&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;modified&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-09-15T11:59:03.174Z&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;organisation_id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;ORGANISATION_ID&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;author_name&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;AUTHOR_NAME&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span>
+           <span class="s2">&quot;&lt;TAG_ID&gt;&quot;</span>
+         <span class="p">]</span>
+      <span class="p">}</span>
+</pre></div>
+</div>
+<p>If the <em>bot_id</em> is invalid, you will get the following response</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">STATUS</span> <span class="n">CODE</span> <span class="p">:</span> <span class="mi">404</span> <span class="o">-</span> <span class="n">Wrong</span> <span class="n">Bot</span> <span class="n">ID</span>
+       <span class="p">{</span>
+         <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="p">{</span>
+           <span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">404</span><span class="p">,</span>
+           <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Error&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;could not find a model with id &lt;bot_id&gt;&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="s2">&quot;MODEL_NOT_FOUND&quot;</span>
+         <span class="p">}</span>
+       <span class="p">}</span>
+</pre></div>
+</div>
+<p>If the <em>flake_id</em> is invalid, you will get the following response</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">STATUS</span> <span class="n">CODE</span> <span class="p">:</span> <span class="mi">404</span> <span class="o">-</span> <span class="n">Wrong</span> <span class="n">Flake</span> <span class="n">ID</span>
+       <span class="p">{</span>
+         <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="p">{</span>
+           <span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">404</span><span class="p">,</span>
+           <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Error&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;No instance with id &lt;flake_id&gt; found for flakes&quot;</span>
+         <span class="p">}</span>
+       <span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><strong>Get tags</strong></p>
+<p>Get the tags associated with your bot using the following request:</p>
+<p><em>Request</em></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>---------------------------------------------------------------------------------------------
+| URL          : http://app.kontikilabs.com:3000/api/bots/{bot_id}/tags                     |
+---------------------------------------------------------------------------------------------
+| HEADER       : Content-Type     : application/json                                        |
+|                                                                                           |
+|                KTL-Access-Token : {access_token}                                          |
+---------------------------------------------------------------------------------------------
+| FILTER       : {&quot;limit&quot;:1, &quot;skip&quot;:0}                                                      |
+|                                                                                           |
+| limit        : Limits the number of records returned to the specified number(or less).    |
+| skip         : Omits specified number of returned records. Useful to paginate responses.  |
+---------------------------------------------------------------------------------------------
+| METHOD       : ``GET``                                                                    |
+---------------------------------------------------------------------------------------------
+</pre></div>
+</div>
+<p><em>Response</em></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">STATUS</span> <span class="n">CODE</span> <span class="p">:</span> <span class="mi">200</span>
+      <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;TAG_NAME&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;slug&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;SLUG&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;TAG_TYPE&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;bot_id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;BOT_ID&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;TAG_ID&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-08-21T06:49:19.105Z&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;modified&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-08-21T06:49:19.104Z&quot;</span>
+        <span class="p">}</span>
+      <span class="p">]</span>
+</pre></div>
+</div>
+<p>If the <em>bot_id</em> is invalid, you will get the following response</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">STATUS</span> <span class="n">CODE</span> <span class="p">:</span> <span class="mi">404</span> <span class="o">-</span> <span class="n">Wrong</span> <span class="n">Bot</span> <span class="n">ID</span>
+       <span class="p">{</span>
+         <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="p">{</span>
+           <span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">404</span><span class="p">,</span>
+           <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Error&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;could not find a model with id &lt;bot_id&gt;&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="s2">&quot;MODEL_NOT_FOUND&quot;</span>
+         <span class="p">}</span>
+       <span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><strong>Get categories</strong></p>
+<p>Get all the created bot categories with the following request:</p>
+<p><em>Request</em></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>------------------------------------------------------------------------------------------
+| URL        : http://app.kontikilabs.com:3000/api/bots/{bot_id}/categories              |
+------------------------------------------------------------------------------------------
+| HEADER     : Content-Type     : application/json                                       |
+|                                                                                        |
+|              KTL-Access-Token : {access_token}                                         |
+------------------------------------------------------------------------------------------
+| FILTER     : {&quot;limit&quot;:1, &quot;skip&quot;:0}                                                     |
+|                                                                                        |
+| limit      : Limits the number of records returned to the specified number(or less).   |
+| skip       : Omits specified number of returned records. Useful to paginate responses. |
+------------------------------------------------------------------------------------------
+| METHOD     : ``GET``                                                                   |
+------------------------------------------------------------------------------------------
+</pre></div>
+</div>
+<p><em>Response</em></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">STATUS</span> <span class="n">CODE</span> <span class="p">:</span> <span class="mi">200</span>
+      <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;CATEGORY_NAME&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;slug&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;SLUG&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;CATEGORY_TYPE&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;bot_id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;BOT_ID&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;CATEGORY_ID&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-08-21T06:47:21.649Z&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;modified&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-08-21T06:47:21.649Z&quot;</span>
+        <span class="p">}</span>
+      <span class="p">]</span>
+</pre></div>
+</div>
+<p>If the <em>bot_id</em> is invalid, you will get the following response</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">STATUS</span> <span class="n">CODE</span> <span class="p">:</span> <span class="mi">404</span> <span class="o">-</span> <span class="n">Wrong</span> <span class="n">Bot</span> <span class="n">ID</span>
+       <span class="p">{</span>
+         <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="p">{</span>
+           <span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">404</span><span class="p">,</span>
+           <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Error&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;could not find a model with id &lt;bot_id&gt;&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="s2">&quot;MODEL_NOT_FOUND&quot;</span>
+         <span class="p">}</span>
+       <span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><strong>Get channels</strong></p>
+<p>Get your bot’s entire channel details by making use of the following GET request:</p>
+<p><em>Request</em></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>------------------------------------------------------------------------------------------
+| URL        : http://app.kontikilabs.com:3000/api/bots/{bot_id}/channels                |
+------------------------------------------------------------------------------------------
+| HEADER     : Content-Type     : application/json                                       |
+|                                                                                        |
+|              KTL-Access-Token : {access_token}                                         |
+------------------------------------------------------------------------------------------
+| FILTER     : {&quot;limit&quot;:1, &quot;skip&quot;:0}                                                     |
+|                                                                                        |
+| limit      : Limits the number of records returned to the specified number(or less).   |
+| skip       : Omits specified number of returned records. Useful to paginate responses. |
+------------------------------------------------------------------------------------------
+| METHOD     : ``GET``                                                                   |
+------------------------------------------------------------------------------------------
+</pre></div>
+</div>
+<p><em>Response</em></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">STATUS</span> <span class="n">CODE</span> <span class="p">:</span> <span class="mi">200</span>
+      <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;CHANNEL_NAME&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;keywordSource&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+              <span class="s2">&quot;keyword&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;KEYWORD_1&gt;&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                  <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;WEB_SOURCE_NAME_1&gt;&quot;</span><span class="p">,</span>
+                  <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;WEB_SOURCE_VALUE_1&gt;&quot;</span><span class="p">,</span>
+                  <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;WEB_SOURCE_ID&gt;&quot;</span><span class="p">,</span>
+                  <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-06-22T12:01:44.099Z&quot;</span><span class="p">,</span>
+                  <span class="s2">&quot;modified&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-06-22T12:01:44.099Z&quot;</span>
+                <span class="p">}</span>
+              <span class="p">]</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+              <span class="s2">&quot;keyword&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;WEB_SOURCE_NAME_2&gt;&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                  <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;WEB_SOURCE_NAME_2&gt;&quot;</span><span class="p">,</span>
+                  <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;WEB_SOURCE_VALUE_2&gt;&quot;</span><span class="p">,</span>
+                  <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;WEB_SOURCE_ID&gt;&quot;</span><span class="p">,</span>
+                  <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-06-28T16:46:34.542Z&quot;</span><span class="p">,</span>
+                  <span class="s2">&quot;modified&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-06-28T16:46:34.542Z&quot;</span>
+                <span class="p">}</span>
+              <span class="p">]</span>
+            <span class="p">}</span>
+          <span class="p">],</span>
+          <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;&lt;CHANNEL_NAME&gt;&quot;</span>
+          <span class="p">],</span>
+          <span class="s2">&quot;cron_time&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;hour&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">CHANNEL_INTERVAL_TIME</span><span class="o">&gt;</span><span class="p">,</span>
+            <span class="s2">&quot;minute&quot;</span><span class="p">:</span> <span class="mi">0</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;CHANNEL_STATUS&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;bot_id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;BOT_ID&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;CHANNEL_ID&gt;&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-08-21T06:47:56.873Z&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;modified&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-08-21T06:47:56.873Z&quot;</span>
+        <span class="p">}</span>
+      <span class="p">]</span>
+</pre></div>
+</div>
+<p>If the <em>bot_id</em> is invalid, you will get the following response</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">STATUS</span> <span class="n">CODE</span> <span class="p">:</span> <span class="mi">404</span> <span class="o">-</span> <span class="n">Wrong</span> <span class="n">Bot</span> <span class="n">ID</span>
+       <span class="p">{</span>
+         <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="p">{</span>
+           <span class="s2">&quot;statusCode&quot;</span><span class="p">:</span> <span class="mi">404</span><span class="p">,</span>
+           <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Error&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;could not find a model with id &lt;bot_id&gt;&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="s2">&quot;MODEL_NOT_FOUND&quot;</span>
+         <span class="p">}</span>
+       <span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
 </div>
 </div>
 
@@ -152,8 +787,8 @@ An example of the request and response:</p>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="index.html"
-                        title="previous chapter">&lt;no title&gt;</a></p>
+  <p class="topless"><a href="Kontiki-Platform.html"
+                        title="previous chapter">Bot Building With Kon-Tiki Labs : The Kontiki Platform</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
@@ -175,7 +810,7 @@ An example of the request and response:</p>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="index.html" title="&lt;no title&gt;"
+          <a href="Kontiki-Platform.html" title="Bot Building With Kon-Tiki Labs : The Kontiki Platform"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Documents 0.0.1 documentation</a> &#187;</li> 
       </ul>
